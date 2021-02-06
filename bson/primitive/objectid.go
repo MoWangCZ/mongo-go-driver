@@ -90,6 +90,9 @@ func ObjectIDFromHex(s string) (ObjectID, error) {
 
 // MarshalJSON returns the ObjectID as a string
 func (id ObjectID) MarshalJSON() ([]byte, error) {
+	if id.IsZero() {
+		return []byte(""), nil
+	}
 	return json.Marshal(id.Hex())
 }
 
